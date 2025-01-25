@@ -43,6 +43,7 @@ class _MyAppState extends ConsumerState<MyApp> {
           return MaterialApp(
             title: 'Task Management App',
             restorationScopeId: 'app',
+            debugShowCheckedModeBanner: false,
             themeMode: _themeNotifier.value,
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(
