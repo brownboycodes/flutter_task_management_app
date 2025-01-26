@@ -18,10 +18,12 @@ flutter run
 
 <div style="display: flex; overflow-x: auto; gap: 10px;">
 
-{% assign images = "screenshot1.png,screenshot2.png,screenshot3.png,screenshot4.png,screenshot5.png,screenshot6.png" | split: "," %}
-{% for image in images %}
-- ![Image]({{ image }})
-{% endfor %}
+- ![Image](./screenshots/screenshot1.png)
+- ![Image](./screenshots/screenshot2.png)
+- ![Image](./screenshots/screenshot3.png)
+- ![Image](./screenshots/screenshot4.png)
+- ![Image](./screenshots/screenshot5.png)
+- ![Image](./screenshots/screenshot6.png)
 
 
 </div>
