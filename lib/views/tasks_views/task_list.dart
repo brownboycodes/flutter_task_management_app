@@ -59,8 +59,6 @@ class _TaskListState extends ConsumerState<TaskList> {
       tasks.sort((a, b) => (a.dueDate ?? time).compareTo(b.dueDate ?? time));
     } else if (searchState == SortOrder.priority) {
       tasks.sort((a, b) => a.priority.index.compareTo(b.priority.index));
-    } else {
-      tasks = tasksLive;
     }
 
     return Padding(
@@ -69,6 +67,7 @@ class _TaskListState extends ConsumerState<TaskList> {
         itemCount: tasks.length,
         itemBuilder: (context, index) {
           final task = tasks[index];
+          print("returning task $index");
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0),
             child: ListTile(
