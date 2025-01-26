@@ -18,13 +18,13 @@ flutter run
 
 <div style="display: flex; overflow-x: auto; gap: 10px;">
 
-![Image](./screenshots/screenshot1.png)
-![Image](./screenshots/screenshot2.png)
-![Image](./screenshots/screenshot3.png)
-![Image](./screenshots/screenshot4.png)
-![Image](./screenshots/screenshot5.png)
-![Image](./screenshots/screenshot6.png)
-
+  <img src="./screenshots/screenshot1.png" alt="Image 1" style="max-width: 100%; height: auto; flex: 1;">
+  <img src="./screenshots/screenshot2.png" alt="Image 2" style="max-width: 100%; height: auto; flex: 1;">
+  <img src="./screenshots/screenshot3.png" alt="Image 3" style="max-width: 100%; height: auto; flex: 1;">
+  <img src="./screenshots/screenshot4.png" alt="Image 4" style="max-width: 100%; height: auto; flex: 1;">
+  <img src="./screenshots/screenshot5.png" alt="Image 5" style="max-width: 100%; height: auto; flex: 1;">
+  <img src="./screenshots/screenshot6.png" alt="Image 6" style="max-width: 100%; height: auto; flex: 1;">
 
 </div>
+
 
