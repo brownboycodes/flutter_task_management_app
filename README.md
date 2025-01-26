@@ -16,6 +16,8 @@ to run the app use the following command
 flutter run
 ```
 
+## Screenshots
+
 <div style="display: flex; gap: 10px; justify-content: center; align-items: center;">
 
   <img src="./screenshots/screenshot1.png" alt="Image 1" style="width: 190px; height: auto;">
