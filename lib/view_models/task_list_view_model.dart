@@ -1,4 +1,3 @@
-//singleton class
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:task_management_app/task_management_app.dart';
 
@@ -29,7 +28,6 @@ class TaskListViewModel {
           .where((element) =>
           element.title!.toLowerCase().contains(searchKeyword.toLowerCase()))
           .toList();
-      print("$searchKeyword searched tasks are $tasks");
     }
     if (searchState == SortOrder.dueDates) {
       final time = DateTime.now();
@@ -46,7 +44,6 @@ class TaskListViewModel {
 
   fetchStoredTasks() async {
     final tasks = await ref.read(TasksDataProvider.fetchTasksProvider.future);
-    print("fetched tasks are $tasks");
     if (tasks.isNotEmpty) {
       ref
           .read(TasksDataProvider.taskListProvider.notifier)

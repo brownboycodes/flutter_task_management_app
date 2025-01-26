@@ -13,7 +13,6 @@ class TasksDashboard extends ConsumerStatefulWidget {
 }
 
 class _TasksDashboardState extends ConsumerState<TasksDashboard> {
-  // bool _isDarkMode = false;
 
   Color get backgroundColor => _backgroundColor;
   Color _backgroundColor = Colors.red;
@@ -28,7 +27,6 @@ class _TasksDashboardState extends ConsumerState<TasksDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    final hiveState = ref.watch(hiveStateNotifierProvider);
     final hiveNotifier = ref.read(hiveStateNotifierProvider.notifier);
     final backgroundColor = _isDarkMode? Theme.of(context).colorScheme.onSurface
         : Theme.of(context).colorScheme.surface;

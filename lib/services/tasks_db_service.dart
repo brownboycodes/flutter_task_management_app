@@ -13,7 +13,6 @@ class TasksDBService{
 
   ///[getDataBase] returns the database instance, and creates the database if it does not exist
   Future<Database> getDataBase() async {
-    print("opening database");
     return await openDatabase(
       join(await getDatabasesPath(), DataBaseConstants.tasksDB),
       version: 1,
@@ -27,18 +26,14 @@ class TasksDBService{
 
   ///[fetchTasks] returns a list of tasks from the database
   Future<List<Task>> fetchTasks(Database database) async {
-    print("29 fetching tasks");
     final tasks = await database.query(DataBaseConstants.tasksTable);
-    print("31 fetching tasks");
     return tasks.map((task) => Task.fromJson(task)).toList();
   }
 
   ///[createTask] creates a task in the database
   Future<int> createTask(Database database, Task task) async {
-    print("creating tasks 37");
     final id = await database.insert(DataBaseConstants.tasksTable, task.toJson(),
         conflictAlgorithm: ConflictAlgorithm.replace);
-    print("create tasks $id");
     return id;
   }
 
@@ -46,7 +41,6 @@ class TasksDBService{
   Future<int> updateTask(Database database, Task task) async {
     final id = await database.update(DataBaseConstants.tasksTable, task.toJson(),
         where: 'id = ?', whereArgs: [task.id]);
-    print("update tasks");
     return id;
   }
 
@@ -54,7 +48,6 @@ class TasksDBService{
   Future<int> deleteTask(Database database, Task task) async {
     final id = await database.delete(DataBaseConstants.tasksTable,
         where: 'id = ?', whereArgs: [task.id]);
-    print("deleted tasks");
     return id;
   }
 }

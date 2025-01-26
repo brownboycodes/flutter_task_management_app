@@ -42,7 +42,6 @@ class _TaskListState extends ConsumerState<TaskList> {
         itemCount: tasks.length,
         itemBuilder: (context, index) {
           final task = tasks[index];
-          print("returning task $index");
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0),
             child: ListTile(

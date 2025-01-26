@@ -13,6 +13,7 @@ export 'models/sort_order.dart';
 
 //view_models
 export 'view_models/task_list_view_model.dart';
+export 'view_models/task_details_view_model.dart';
 
 //providers
 export 'providers/tasks_data_provider.dart';

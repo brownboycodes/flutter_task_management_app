@@ -19,9 +19,10 @@ class TasksDataProvider extends StateNotifier<Database?> {
 
   Future<void> initializeDatabase() async {
     if (state != null) return; // If the database is already initialized, return
-    print("Initializing the database...");
+    if(kDebugMode){
+      debugPrint("Initializing the database...");
+    }
     state = await ref.read(TasksDataProvider.tasksDBServiceProvider).getDataBase();
-    print("Database initialized");
   }
 
   static final databaseProvider = StateNotifierProvider<TasksDataProvider, Database?>((ref) {
@@ -33,7 +34,6 @@ class TasksDataProvider extends StateNotifier<Database?> {
   static final tasksDBProvider = FutureProvider.autoDispose<Database>((ref) async{
     final dbService = ref.watch(tasksDBServiceProvider);
     final data = await dbService.getDataBase();
-    print("data is $data");
     return data;
   });
 
@@ -47,7 +47,6 @@ class TasksDataProvider extends StateNotifier<Database?> {
     }
     final db = ref.watch(databaseProvider);
     final dbService = ref.watch(tasksDBServiceProvider);
-    print("44 db is $db");
     return db!=null? await dbService.fetchTasks(db):[];
   });
 
@@ -60,7 +59,6 @@ class TasksDataProvider extends StateNotifier<Database?> {
 
   ///[updateTaskProvider] updates a task in the database
   static final updateTaskProvider = FutureProvider.autoDispose.family<int,Task>((ref,task) async{
-    // final db = ref.watch(tasksDBProvider);
     final db = ref.watch(databaseProvider);
     final dbService = ref.watch(tasksDBServiceProvider);
     return db!=null? await dbService.updateTask(db,task):Future.value(0);

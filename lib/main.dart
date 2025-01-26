@@ -20,10 +20,8 @@ class _MyAppState extends ConsumerState<MyApp> {
   void initState() {
     super.initState();
     final storedTheme = ref.read(hiveStateNotifierProvider)?.themeMode.toThemeMode();
-    print("stored theme is $storedTheme");
     _themeNotifier=
     ValueNotifier(storedTheme ?? ThemeMode.light);
-    print("26 theme set to ${_themeNotifier.value}");
   }
 
   @override

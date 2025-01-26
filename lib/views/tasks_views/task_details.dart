@@ -13,51 +13,19 @@ class TaskDetails extends ConsumerStatefulWidget {
 
 class _TaskDetailsState extends ConsumerState<TaskDetails> {
   final hintStyle = TextStyle(color: Colors.grey);
-
-  late ValueNotifier<DateTime> _dueDateNotifier;
-  late TextEditingController _titleTextController;
-  late TextEditingController _descriptionTextController;
-  late ValueNotifier<Priority> _priorityNotifier;
-  late ValueNotifier<TaskStatus> _taskStatusNotifier;
-  // late List<Task> _taskList;
-
+  late TaskDetailsViewModel _viewModel;
   @override
   void initState() {
-    _dueDateNotifier = ValueNotifier(widget.task?.dueDate ?? DateTime.now());
-    _titleTextController = TextEditingController(text: widget.task?.title);
-    _descriptionTextController =
-        TextEditingController(text: widget.task?.description);
-    _priorityNotifier = ValueNotifier(widget.task?.priority ?? Priority.none);
-    _taskStatusNotifier =
-        ValueNotifier(widget.task?.status ?? TaskStatus.pending);
-    // _taskList= ref.read(TasksDataProvider.taskListStateProvider.notifier).state;
     super.initState();
+    _viewModel = TaskDetailsViewModel(ref, widget.task);
   }
 
   @override
   void didUpdateWidget(TaskDetails oldWidget) {
     super.didUpdateWidget(oldWidget);
-
-    // Check if the counter property has changed
-    if(widget.task==null) {
-      _dueDateNotifier = ValueNotifier(DateTime.now());
-      _titleTextController = TextEditingController();
-      _descriptionTextController =
-          TextEditingController();
-      _priorityNotifier = ValueNotifier(Priority.none);
-      _taskStatusNotifier =
-          ValueNotifier(TaskStatus.pending);
-    }else if (widget.task != oldWidget.task) {
-      _dueDateNotifier = ValueNotifier(widget.task?.dueDate ?? DateTime.now());
-      _titleTextController = TextEditingController(text: widget.task?.title);
-      _descriptionTextController =
-          TextEditingController(text: widget.task?.description);
-      _priorityNotifier = ValueNotifier(widget.task?.priority ?? Priority.none);
-      _taskStatusNotifier =
-          ValueNotifier(widget.task?.status ?? TaskStatus.pending);
-      setState(() {
-      });
-    }
+    _viewModel.updateData(widget.task);
+    setState(() {
+    });
   }
 
   @override
@@ -78,7 +46,7 @@ class _TaskDetailsState extends ConsumerState<TaskDetails> {
                 child: TextField(
                   style: Theme.of(context).textTheme.displaySmall,
                   maxLines: 2,
-                  controller: _titleTextController,
+                  controller: _viewModel.titleTextController,
                   onTapOutside: (event) {
                     if (FocusManager.instance.primaryFocus != null) {
                       FocusManager.instance.primaryFocus!.unfocus();
@@ -91,12 +59,12 @@ class _TaskDetailsState extends ConsumerState<TaskDetails> {
                       hintStyle: hintStyle),
                 ),
               ),
-              TaskStatusSwitch(taskStatusNotifier: _taskStatusNotifier,)
+              TaskStatusSwitch(taskStatusNotifier: _viewModel.taskStatusNotifier,)
             ],
           ),
           //DESCRIPTION AND OTHER DETAILS OF THE TASK
           TextField(
-            controller: _descriptionTextController,
+            controller: _viewModel.descriptionTextController,
             style: Theme.of(context).textTheme.bodyLarge,
             maxLines: 5,
             onTapOutside: (event) {
@@ -127,7 +95,7 @@ class _TaskDetailsState extends ConsumerState<TaskDetails> {
                   style: labelStyle,
                 )
               ]),
-              DueDatePicker(initialDateNotifier: _dueDateNotifier,),
+              DueDatePicker(initialDateNotifier: _viewModel.dueDateNotifier,),
             ],
           ),
           SizedBox(height: 16),
@@ -143,7 +111,7 @@ class _TaskDetailsState extends ConsumerState<TaskDetails> {
                   style: labelStyle,
                 )
               ]),
-              PriorityPicker(priorityNotifier: _priorityNotifier,)
+              PriorityPicker(priorityNotifier: _viewModel.priorityNotifier,)
             ],
           ),
           SizedBox(
@@ -151,31 +119,7 @@ class _TaskDetailsState extends ConsumerState<TaskDetails> {
           ),
           widget.task == null
               ? TextButton(
-                  onPressed: () async{
-                    final time = DateTime.now();
-                    final task = Task(
-                      id: time.millisecondsSinceEpoch,
-                      createdAt: time,
-                      title: _titleTextController.text,
-                      description: _descriptionTextController.text,
-                      dueDate:_dueDateNotifier.value,
-                      priority: _priorityNotifier.value,
-                      status: TaskStatus.pending,
-                    );
-                    final tasks =
-                        await ref.read(TasksDataProvider.createTaskProvider(task).future);
-                    if(mounted){
-                      print("task created $tasks");
-                      ref.read(TasksDataProvider.taskListProvider.notifier).addTask(task);
-                      if(isLandScape) {
-                        ref.read(
-                            TasksDataProvider.activeTaskStateProvider.notifier)
-                            .setTask(null);
-                      }else{
-                        Navigator.pop(context);
-                      }
-                    }
-                  },
+                  onPressed: ()=>_viewModel.addTask(context, isLandScape),
                   style: TextButton.styleFrom(
                     backgroundColor:
                         Theme.of(context).colorScheme.primary.withAlpha(161),
@@ -197,20 +141,7 @@ class _TaskDetailsState extends ConsumerState<TaskDetails> {
                   children: [
                     Expanded(
                       child: TextButton(
-                        onPressed: () async{
-                          final tasks = await ref
-                              .read(TasksDataProvider.deleteTaskProvider(widget.task!).future);
-                          if(mounted){
-                            ref.read(TasksDataProvider.taskListProvider.notifier).deleteTask(widget.task!);
-                            if(isLandScape) {
-                              ref.read(
-                                  TasksDataProvider.activeTaskStateProvider.notifier)
-                                  .setTask(null);
-                            }else {
-                              Navigator.pop(context);
-                            }
-                          }
-                        },
+                        onPressed: () => _viewModel.deleteTask(context, isLandScape),
                         style: TextButton.styleFrom(
                           backgroundColor: Theme.of(context)
                               .colorScheme
@@ -233,29 +164,7 @@ class _TaskDetailsState extends ConsumerState<TaskDetails> {
                     SizedBox(width: 16),
                     Expanded(
                       child: TextButton(
-                        onPressed: () {
-                          final task =(widget.task!).copyWith(
-                            title: _titleTextController.text,
-                            description: _descriptionTextController.text,
-                            dueDate:_dueDateNotifier.value,
-                            priority: _priorityNotifier.value,
-                            status: _taskStatusNotifier.value,
-                          );
-                          final tasks = ref
-                              .read(TasksDataProvider.updateTaskProvider(task).future);
-
-                          if(mounted){
-                            print("task updated $tasks");
-                              ref.read(TasksDataProvider.taskListProvider.notifier).updateTask(task);
-                            if(isLandScape) {
-                              ref.read(
-                                  TasksDataProvider.activeTaskStateProvider.notifier)
-                                  .setTask(null);
-                            }else {
-                              Navigator.pop(context);
-                            }
-                          }
-                        },
+                        onPressed: () => _viewModel.updateTask(context, isLandScape),
                         style: TextButton.styleFrom(
                           backgroundColor: Theme.of(context)
                               .colorScheme

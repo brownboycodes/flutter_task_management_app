@@ -17,7 +17,6 @@ class HiveStateNotifier extends StateNotifier<UserPreferences?> {
   /// Load initial data from Hive
   Future<void> _loadInitialData() async {
     state = hiveDBService.getUserPreferences();
-    print("state is $state");
   }
 
   /// Update a value in the state and Hive
@@ -28,7 +27,6 @@ class HiveStateNotifier extends StateNotifier<UserPreferences?> {
     state = state?.updateValue(themeMode: tm.ThemeMode.fromTheme(themeMode), sortOrder: sortOrder);
     if(state != null) {
       await hiveDBService.saveUserPreferences(state!);
-      print("updated state is $state");
     }
   }
 }
