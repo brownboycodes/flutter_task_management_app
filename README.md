@@ -16,14 +16,14 @@ to run the app use the following command
 flutter run
 ```
 
-<div style="display: flex; overflow-x: auto; gap: 10px;">
+<div style="display: flex; gap: 10px;">
 
-  <img src="./screenshots/screenshot1.png" alt="Image 1" style="flex: 1 1 auto; max-width: 100px; height: auto;">
-  <img src="./screenshots/screenshot2.png" alt="Image 2" style="flex: 1 1 auto; max-width: 10%; height: auto;">
-  <img src="./screenshots/screenshot3.png" alt="Image 3" style="flex: 1 1 auto; max-width: 10%; height: auto;">
-  <img src="./screenshots/screenshot4.png" alt="Image 4" style="flex: 1 1 auto; max-width: 10%; height: auto;">
-  <img src="./screenshots/screenshot5.png" alt="Image 5" style="flex: 1 1 auto; max-width: 10%; height: auto;">
-  <img src="./screenshots/screenshot6.png" alt="Image 6" style="flex: 1 1 auto; max-width: 10%; height: auto;">
+  <img src="./screenshots/screenshot1.png" alt="Image 1" style="width: 100px; height: auto;">
+  <img src="./screenshots/screenshot2.png" alt="Image 2" style="width: 100px; height: auto;">
+  <img src="./screenshots/screenshot3.png" alt="Image 3" style="width: 100px; height: auto;">
+  <img src="./screenshots/screenshot4.png" alt="Image 4" style="width: 100px; height: auto;">
+  <img src="./screenshots/screenshot5.png" alt="Image 5" style="width: 100px; height: auto;">
+  <img src="./screenshots/screenshot6.png" alt="Image 6" style="width: 100px; height: auto;">
 
 </div>
 
