@@ -25,19 +25,19 @@ flutter run
 
   - Add, edit, delete, and view tasks.
 
-  - Mark tasks as "Completed" or "Pending" by interacting with the toggle switch.
+  - Mark tasks as `Completed` or `Pending` by interacting with the toggle switch.
 
 ### 2. Data Storage
 
-## SQLite:
+## Sqflite:
 
-- Used SQLite to store task details.
+- Used `sqflite` to store task details.
 
 - Persisted task data across app launches.
 
 ## Hive:
 
-- Used Hive to store user preferences, such as:
+- Used `Hive` to store user preferences, such as:
 
   - App theme (light/dark).
 
@@ -45,7 +45,7 @@ flutter run
 
 ## 3. State Management
 
-- Used Riverpod to manage the app's state:
+- Used `Riverpod` to manage the app's state:
 
   - Task management (CRUD operations).
 
