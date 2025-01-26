@@ -12,9 +12,12 @@ export 'models/user_preferences.dart';
 export 'models/sort_order.dart';
 
 //view_models
-export 'view_models/tasks_data_provider.dart';
-export 'view_models/search_states.dart';
-export 'view_models/hive_db_provider.dart';
+export 'view_models/task_list_view_model.dart';
+
+//providers
+export 'providers/tasks_data_provider.dart';
+export 'providers/search_states.dart';
+export 'providers/hive_db_provider.dart';
 
 //views
 export 'views/tasks_views/tasks_dashboard.dart';

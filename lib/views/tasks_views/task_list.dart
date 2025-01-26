@@ -15,26 +15,16 @@ class TaskList extends ConsumerStatefulWidget {
 class _TaskListState extends ConsumerState<TaskList> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    fetchStoredTasks();
+    viewModel = TaskListViewModel(ref);
   }
+  late TaskListViewModel viewModel;
 
-  fetchStoredTasks() async {
-    final tasks = await ref.read(TasksDataProvider.fetchTasksProvider.future);
-    print("fetched tasks are $tasks");
-    if (tasks.isNotEmpty) {
-      ref
-          .read(TasksDataProvider.taskListProvider.notifier)
-          .initializeTasks(tasks);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    final tasksLive = ref.watch(TasksDataProvider.taskListProvider);
 
-    if (tasksLive.isEmpty) {
+    if (viewModel.noTasks()) {
       return Center(
         child: Image.asset(
           "assets/empty-box.png",
@@ -44,22 +34,7 @@ class _TaskListState extends ConsumerState<TaskList> {
       );
     }
 
-    final searchState = ref.watch(filterStateProvider);
-    final searchKeyword = ref.watch(searchKeywordProvider);
-    List<Task> tasks = tasksLive;
-    if (searchKeyword.isNotEmpty) {
-      tasks = tasks
-          .where((element) =>
-              element.title!.toLowerCase().contains(searchKeyword.toLowerCase()))
-          .toList();
-      print("$searchKeyword searched tasks are $tasks");
-    }
-    if (searchState == SortOrder.dueDates) {
-      final time = DateTime.now();
-      tasks.sort((a, b) => (a.dueDate ?? time).compareTo(b.dueDate ?? time));
-    } else if (searchState == SortOrder.priority) {
-      tasks.sort((a, b) => a.priority.index.compareTo(b.priority.index));
-    }
+    final tasks = viewModel.getFilteredTasks();
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
