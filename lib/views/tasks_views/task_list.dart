@@ -56,7 +56,7 @@ class _TaskListState extends ConsumerState<TaskList> {
     }
     if (searchState == SortOrder.dueDates) {
       final time = DateTime.now();
-      tasks.sort((a, b) => (b.dueDate ?? time).compareTo(a.dueDate ?? time));
+      tasks.sort((a, b) => (a.dueDate ?? time).compareTo(b.dueDate ?? time));
     } else if (searchState == SortOrder.priority) {
       tasks.sort((a, b) => a.priority.index.compareTo(b.priority.index));
     } else {

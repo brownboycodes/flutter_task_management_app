@@ -9,6 +9,7 @@ export 'services/tasks_db_service.dart';
 //models
 export 'models/task.dart';
 export 'models/user_preferences.dart';
+export 'models/sort_order.dart';
 
 //view_models
 export 'view_models/tasks_data_provider.dart';

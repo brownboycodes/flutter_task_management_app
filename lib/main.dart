@@ -1,11 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:task_management_app/task_management_app.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  HiveDBService().initialize();
+  await HiveDBService().initialize();
   runApp(ProviderScope(child: MyApp()));
 }
 
@@ -20,19 +19,20 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
     super.initState();
-    // initializeServices();
+    final storedTheme = ref.read(hiveStateNotifierProvider)?.themeMode.toThemeMode();
+    print("stored theme is $storedTheme");
+    _themeNotifier=
+    ValueNotifier(storedTheme ?? ThemeMode.light);
+    print("26 theme set to ${_themeNotifier.value}");
   }
 
-  // Future<void> initializeServices() async {
-  //   final dbNotifier = ref.read(TasksDataProvider.databaseProvider.notifier);
-  //   await dbNotifier.initializeDatabase();
-  //   if (kDebugMode) {
-  //     debugPrint("Database initialized");
-  //   }
-  // }
+  @override
+  void dispose() {
+    HiveDBService().close();
+    super.dispose();
+  }
 
-  final ValueNotifier<ThemeMode> _themeNotifier =
-      ValueNotifier(ThemeMode.light);
+  late ValueNotifier<ThemeMode> _themeNotifier;
 
 // This widget is the root of your application.
   @override

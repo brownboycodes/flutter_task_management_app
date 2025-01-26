@@ -13,3 +13,7 @@ class TaskModelConstants{
   static const String priority = 'priority';
   static const String status = 'status';
 }
+
+class HiveDBConstants{
+  static const String userPreferences = 'user_preferences';
+}

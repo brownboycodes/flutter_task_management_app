@@ -13,7 +13,7 @@ class TasksDashboard extends ConsumerStatefulWidget {
 }
 
 class _TasksDashboardState extends ConsumerState<TasksDashboard> {
-  bool _isDarkMode = false;
+  // bool _isDarkMode = false;
 
   Color get backgroundColor => _backgroundColor;
   Color _backgroundColor = Colors.red;
@@ -54,10 +54,8 @@ class _TasksDashboardState extends ConsumerState<TasksDashboard> {
                         widget.themeNotifier.value == ThemeMode.light
                             ? ThemeMode.dark
                             : ThemeMode.light;
-                    hiveNotifier.updateValue("themeMode", widget.themeNotifier.value.label);
-                    setState(() {
-                      _isDarkMode = !_isDarkMode;
-                    });
+                    hiveNotifier.updateValue(themeMode: widget.themeNotifier.value);
+
                   },
                 ),
               ],
@@ -139,4 +137,6 @@ class _TasksDashboardState extends ConsumerState<TasksDashboard> {
       ),
     );
   }
+
+  bool get _isDarkMode => widget.themeNotifier.value == ThemeMode.dark;
 }

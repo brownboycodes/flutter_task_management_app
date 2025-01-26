@@ -3,13 +3,12 @@ import 'package:task_management_app/task_management_app.dart';
 class Task {
   Task(
       {required this.id,
-        this.title,
+      this.title,
       this.description,
       required this.createdAt,
       this.priority = Priority.none,
       this.dueDate,
-      this.status = TaskStatus.pending
-      });
+      this.status = TaskStatus.pending});
 
   ///[createdAt] is the date and time when the task was created
   DateTime createdAt;
@@ -39,8 +38,9 @@ class Task {
       title: json[TaskModelConstants.title],
       description: json[TaskModelConstants.description],
       createdAt: DateTime.parse(json[TaskModelConstants.createdAt]),
-      dueDate:
-          json[TaskModelConstants.dueDate] != null ? DateTime.parse(json[TaskModelConstants.dueDate]) : null,
+      dueDate: json[TaskModelConstants.dueDate] != null
+          ? DateTime.parse(json[TaskModelConstants.dueDate])
+          : null,
       priority: Priority.fromString(json[TaskModelConstants.priority]),
       status: TaskStatus.fromString(json[TaskModelConstants.status]),
     );
@@ -90,4 +90,3 @@ class Task {
         other.status == status;
   }
 }
-

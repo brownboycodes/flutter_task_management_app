@@ -55,25 +55,3 @@ enum TaskStatus {
   }
 }
 
-///[SortOrder] is an enum class that represents the sort order of a list
-enum SortOrder {
-  dueDates("Due Dates"),
-  priority("Priority"),
-  defaultOrder("Default");
-
-  const SortOrder(this.label);
-
-  ///[label] is the label of the sort order
-  final String label;
-
-  static SortOrder fromString(String? label) {
-    switch (label) {
-      case "Due Dates":
-        return SortOrder.dueDates;
-      case "Priority":
-        return SortOrder.priority;
-      default:
-        return SortOrder.defaultOrder;
-    }
-  }
-}

@@ -24,9 +24,9 @@ class _FilterMenuState extends ConsumerState<FilterMenu> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       final hiveState = ref.read(hiveStateNotifierProvider);
-      final sortOrder = hiveState['sortOrder'];
+      final sortOrder = hiveState?.sortOrder;
       if (sortOrder != null) {
-        _activate(SortOrder.values.firstWhere((element) => element.label == sortOrder));
+        _activate(SortOrder.values.firstWhere((element) => element == sortOrder));
       }
     });
     super.initState();
@@ -40,7 +40,7 @@ class _FilterMenuState extends ConsumerState<FilterMenu> {
       case SortOrder.priority:
       default:
         ref.read(filterStateProvider.notifier).updateSearchState(selection);
-        ref.read(hiveStateNotifierProvider.notifier).updateValue('sortOrder', selection.label);
+        ref.read(hiveStateNotifierProvider.notifier).updateValue(sortOrder: selection);
         break;
     }
   }
