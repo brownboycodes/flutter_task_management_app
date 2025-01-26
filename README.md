@@ -15,6 +15,47 @@ to run the app use the following command
 ```bash
 flutter run
 ```
+---
+
+## Features
+
+### 1. Task Management
+
+- Users will be able to:
+
+  - Add, edit, delete, and view tasks.
+
+  - Mark tasks as "Completed" or "Pending" by interacting with the toggle switch.
+
+### 2. Data Storage
+
+## SQLite:
+
+- Used SQLite to store task details.
+
+- Persisted task data across app launches.
+
+## Hive:
+
+- Used Hive to store user preferences, such as:
+
+  - App theme (light/dark).
+
+  - Default sort order for tasks (by date, priority, etc.).
+
+## 3. State Management
+
+- Used Riverpod to manage the app's state:
+
+  - Task management (CRUD operations).
+
+  - User preferences.
+
+## 4. Additional Features
+- Search and filter functionality for tasks.
+- Responsive UI for mobile and tablet devices.
+
+---
 
 ## Screenshots
 
