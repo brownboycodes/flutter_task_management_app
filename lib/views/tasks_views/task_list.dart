@@ -27,7 +27,7 @@ class _TaskListState extends ConsumerState<TaskList> {
     if (viewModel.noTasks()) {
       return Center(
         child: Image.asset(
-          "assets/empty-box.png",
+          AssetConstants.emptyStateImage,
           width: 180,
           height: 180,
         ),

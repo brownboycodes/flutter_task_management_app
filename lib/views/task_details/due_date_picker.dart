@@ -39,7 +39,7 @@ class _DueDatePickerState extends State<DueDatePicker>
       context: context,
       builder: (BuildContext context) {
         return DatePickerDialog(
-          restorationId: 'date_picker_dialog',
+          restorationId: DueDatePickerConstants.restorationId,
           initialEntryMode: DatePickerEntryMode.calendarOnly,
           initialDate: DateTime.fromMillisecondsSinceEpoch(arguments! as int),
           firstDate: DateTime(2024),
@@ -51,9 +51,9 @@ class _DueDatePickerState extends State<DueDatePicker>
 
   @override
   void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    registerForRestoration(_selectedDate, 'selected_date');
+    registerForRestoration(_selectedDate, DueDatePickerConstants.selectedDateRestorationId);
     registerForRestoration(
-        _restorableDatePickerRouteFuture, 'date_picker_route_future');
+        _restorableDatePickerRouteFuture, DueDatePickerConstants.datePickerRouteRestorationId);
   }
 
   void _selectDate(DateTime? newSelectedDate) {

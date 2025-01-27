@@ -1,15 +1,16 @@
 import 'package:hive/hive.dart';
+import 'package:task_management_app/task_management_app.dart';
 part 'sort_order.g.dart';
 
 ///[SortOrder] is an enum class that represents the sort order of a list
 @HiveType(typeId: 2)
 enum SortOrder {
   @HiveField(0)
-  dueDates("Due Dates"),
+  dueDates(SortOrderConstants.dueDates),
   @HiveField(1)
-  priority("Priority"),
+  priority(SortOrderConstants.priority),
   @HiveField(2)
-  defaultOrder("Default");
+  defaultOrder(SortOrderConstants.defaultOrder);
 
   const SortOrder(this.label);
 
@@ -18,9 +19,9 @@ enum SortOrder {
 
   static SortOrder fromString(String? label) {
     switch (label) {
-      case "Due Dates":
+      case SortOrderConstants.dueDates:
         return SortOrder.dueDates;
-      case "Priority":
+      case SortOrderConstants.priority:
         return SortOrder.priority;
       default:
         return SortOrder.defaultOrder;

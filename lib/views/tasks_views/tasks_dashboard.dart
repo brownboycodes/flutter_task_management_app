@@ -43,7 +43,7 @@ class _TasksDashboardState extends ConsumerState<TasksDashboard> {
                 : Theme.of(context).colorScheme.surface,
             appBar: AppBar(
               backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-              title: Text("Task Management App"),
+              title: Text(AppConstants.title),
               actions: [
                 IconButton(
                   icon: Icon(_isDarkMode ? Icons.sunny : Icons.nightlight),

@@ -39,8 +39,8 @@ class _MyAppState extends ConsumerState<MyApp> {
         valueListenable: _themeNotifier,
         builder: (context, themeMode, child) {
           return MaterialApp(
-            title: 'Task Management App',
-            restorationScopeId: 'app',
+            title: AppConstants.title,
+            restorationScopeId: AppConstants.restorationScopeId,
             debugShowCheckedModeBanner: false,
             themeMode: _themeNotifier.value,
             theme: ThemeData(
